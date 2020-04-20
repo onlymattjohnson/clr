@@ -17,7 +17,7 @@ cd clr
 pipenv --python 3.8
 pipenv install
 ```
-1. Run app
+3. Run app
 ```
 pipenv run python ./clr.py
 ```
