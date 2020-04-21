@@ -6,6 +6,9 @@ class Player():
     self.name = name
     self.tokens = 3
 
+  def __repr__(self):
+    return f'Player: {self.name} with {self.tokens} tokens'
+
   def roll_dice(self):
     """
     Rolls the dice in a CLR game
@@ -15,10 +18,29 @@ class Player():
 
     return dice_values[result]
 
-if __name__ == '__main__':
-    new_player = Player(name = 'Matt')
-    dice1 = new_player.roll_dice()
-    dice2 = new_player.roll_dice()
-    dice3 = new_player.roll_dice()
 
-    print(dice1, dice2, dice3)
+class Game():
+
+  def __init__(self):
+    self.num_players = 0
+    self.players = []
+
+    print('Welcome to CLR!')
+    self.initialize_game()
+
+  def initialize_game(self):
+    try:
+      self.num_players = int(input('How many players are playing? '))
+    except:
+      print('Please enter a valid number of players.')
+      self.initialize_game()
+
+    for i in range(0,self.num_players):
+      player_name = input(f'What is the name of player {i + 1}? ')
+      new_player = Player(name = player_name)
+      self.players.append(new_player)
+
+    print(self.players)
+
+if __name__ == '__main__':
+    new_game = Game()
