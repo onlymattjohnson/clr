@@ -49,6 +49,7 @@ class Game():
   def __init__(self):
     self.num_players = 0
     self.players = []
+    self.center = 0
 
     print('Welcome to CLR!')
     self.initialize_game()
