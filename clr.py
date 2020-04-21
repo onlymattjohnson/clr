@@ -68,5 +68,22 @@ class Game():
 
     print(self.players)
 
+  def move_tokens(self, player_from, player_to):
+    self.players[player_from].tokens = self.players[player_from].tokens - 1
+    if player_to == 'C':
+      self.center = self.center + 1
+    else:
+      self.players[player_to].tokens = self.players[player_to].tokens + 1
+    
+  def move_tokens_by_direction(self, player_from, direction):
+    if direction == 'L':
+      player_to = player_from - 1
+    if direction == 'R':
+      player_to = player_from + 1
+    if direction == 'C':
+      player_to = 'C'
+    
+    self.move_tokens(player_from = player_from, player_to = player_to)
+
 if __name__ == '__main__':
     new_game = Game()
