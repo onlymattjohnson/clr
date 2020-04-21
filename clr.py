@@ -2,12 +2,13 @@ import random
 
 class Player():
 
-  def __init__(self, name):
+  def __init__(self, name, player_position = None):
     self.name = name
     self.tokens = 3
+    self.player_position = player_position
 
   def __repr__(self):
-    return f'Player: {self.name} with {self.tokens} tokens'
+    return f'Player {self.name} in position {self.player_position} with {self.tokens} tokens'
 
   def roll_dice(self):
     """
@@ -37,7 +38,7 @@ class Game():
 
     for i in range(0,self.num_players):
       player_name = input(f'What is the name of player {i + 1}? ')
-      new_player = Player(name = player_name)
+      new_player = Player(name = player_name, player_position = i)
       self.players.append(new_player)
 
     print(self.players)
