@@ -4,11 +4,19 @@ class Player():
 
   def __init__(self, name, player_position = None):
     self.name = name
+    self.num_rolls = 3
     self.tokens = 3
     self.player_position = player_position
+    self.dice = [0,0,0]
 
   def __repr__(self):
     return f'Player {self.name} in position {self.player_position} with {self.tokens} tokens'
+
+  def calculate_rolls(self):
+    if self.tokens >= 3:
+      self.num_rolls = 3
+    else:
+      self.num_rolls = self.tokens
 
   def roll_dice(self):
     """
@@ -19,6 +27,22 @@ class Player():
 
     return dice_values[result]
 
+  def roll_all_dice(self):
+    """
+    Rolls all dice
+    """
+
+    self.calculate_rolls()
+    if self.num_rolls > 0:
+      for i in range(0,self.num_rolls):
+        self.dice[i] = self.roll_dice()
+      if self.num_rolls == 1:
+        self.dice[1] = None
+        self.dice[2] = None
+      if self.num_rolls == 2:
+        self.dice[2] = None
+    else:
+      self.dice = [None, None, None]
 
 class Game():
 
