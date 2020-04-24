@@ -49,7 +49,31 @@ class TestPlayerMethods(unittest.TestCase):
     values_allowed = ['•', 'L', 'C', 'R']
     self.assertIn(one_rolls, values_allowed, f'Dice roll produced {one_rolls} which is not an expected value.')
 
+  def test_roll_all_dice(self):
+    values_allowed = ['•', 'L', 'C', 'R']
 
+    self.player0.roll_all_dice()
+    self.player0.dice
+    self.assertEqual(self.player0.dice, [None, None, None], f'Expected no rolls for player with no tokens.')
+
+    self.player1.roll_all_dice()
+    self.player1.dice
+    self.assertIn(self.player1.dice[0], values_allowed, f'Dice roll produced {self.player1.dice[0]} which is not an expected value.')
+    self.assertEqual(self.player1.dice[1], None, f'Expected 1 token player to only have 1 dice value.')
+    self.assertEqual(self.player1.dice[2], None, f'Expected 1 token player to only have 1 dice value.')
+
+    self.player2.roll_all_dice()
+    self.player2.dice
+    self.assertIn(self.player2.dice[0], values_allowed, f'Dice roll produced {self.player2.dice[0]} which is not an expected value.')
+    self.assertIn(self.player2.dice[1], values_allowed, f'Dice roll produced {self.player2.dice[1]} which is not an expected value.')
+    self.assertEqual(self.player2.dice[2], None, f'Expected 2 token player to only have 2 dice values.')
+
+    self.player3.roll_all_dice()
+    self.player3.dice
+    self.assertIn(self.player3.dice[0], values_allowed, f'Dice roll produced {self.player3.dice[0]} which is not an expected value.')
+    self.assertIn(self.player3.dice[1], values_allowed, f'Dice roll produced {self.player3.dice[1]} which is not an expected value.')
+    self.assertIn(self.player3.dice[2], values_allowed, f'Dice roll produced {self.player3.dice[2]} which is not an expected value.')
+    
 if __name__ == '__main__':
   unittest.main()
 
