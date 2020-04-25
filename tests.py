@@ -9,6 +9,7 @@ class TestGameMethods(unittest.TestCase):
     self.game.add_player('Matt')
     num_players = len(self.game.players)
     self.assertEqual(num_players, 1, f'Added 1 player but there are {num_players} showing.')
+    self.assertEqual(self.game.players[0].name, 'Matt', f'Expected player 0 name to be Matt but got {self.game.players[0].name}')
   
 class TestPlayerMethods(unittest.TestCase):
   def setUp(self):
