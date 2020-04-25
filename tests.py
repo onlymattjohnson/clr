@@ -1,6 +1,15 @@
 import unittest
-from clr import Player
+from clr import Player, Game
 
+class TestGameMethods(unittest.TestCase):
+  def setUp(self):
+    self.game = Game()
+  
+  def test_add_player(self):
+    self.game.add_player('Matt')
+    num_players = len(self.game.players)
+    self.assertEqual(num_players, 1, f'Added 1 player but there are {num_players} showing.')
+  
 class TestPlayerMethods(unittest.TestCase):
   def setUp(self):
     self.player0 = Player(name = 'Test Player 0')
