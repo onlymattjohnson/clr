@@ -51,6 +51,12 @@ class Game():
     self.players = []
     self.center = 0
 
+  def add_player(self, player_name = None):
+    num_players = len(self.players)
+    if not player_name:
+      player_name = input(f'What is the name of player {num_players + 1}? ')
+    new_player = Player(name = player_name, player_position = num_players)
+    self.players.append(new_player)
 
   def start_game(self):
     try:
@@ -60,9 +66,7 @@ class Game():
       self.initialize_game()
 
     for i in range(0,self.num_players):
-      player_name = input(f'What is the name of player {i + 1}? ')
-      new_player = Player(name = player_name, player_position = i)
-      self.players.append(new_player)
+      self.add_player()
 
     print(self.players)
 
