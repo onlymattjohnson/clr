@@ -51,10 +51,8 @@ class Game():
     self.players = []
     self.center = 0
 
-    print('Welcome to CLR!')
-    self.initialize_game()
 
-  def initialize_game(self):
+  def start_game(self):
     try:
       self.num_players = int(input('How many players are playing? '))
     except:
@@ -87,3 +85,4 @@ class Game():
 
 if __name__ == '__main__':
     new_game = Game()
+    new_game.start_game()
