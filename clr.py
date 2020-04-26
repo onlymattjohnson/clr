@@ -83,6 +83,8 @@ class Game():
       player_to = player_from - 1
     if direction == 'R':
       player_to = player_from + 1
+      if player_to == len(self.players):
+        player_to = 0
     if direction == 'C':
       player_to = 'C'
     

@@ -54,7 +54,47 @@ class TestGameMethods(unittest.TestCase):
     self.game.move_tokens(1, 'C')
     self.assertEqual(self.game.players[1].tokens, 5, f'Moving 1 token from Player 1 to center, expecting P1 to have 5 tokens but actually has {self.game.players[1].tokens}')
     self.assertEqual(self.game.center, 1, f'Moving 1 token from Player 1 to center, expecting Center to have 1 tokens but actually has {self.game.center}')
-       
+
+  def test_move_tokens_by_direction(self):
+    self.game.reset_game()
+
+    self.game.add_player('Test0')
+    self.game.add_player('Test1')
+    self.game.add_player('Test2')
+    self.game.add_player('Test3')
+
+    # Test moving from 0 to the right
+    self.game.move_tokens_by_direction(0, 'R')
+    # Expected P0: 2, P1: 4
+    self.assertEqual(self.game.players[0].tokens, 2)
+    self.assertEqual(self.game.players[1].tokens, 4)
+
+    # Test moving from 0 to the left
+    self.game.move_tokens_by_direction(0, 'L')
+    # Expected P0: 1, P3: 4
+    self.assertEqual(self.game.players[0].tokens, 1)
+    self.assertEqual(self.game.players[3].tokens, 4)
+
+    # Test moving from 0 to the center
+    self.game.move_tokens_by_direction(0, 'C')
+    # Expected P0: 0, Center: 1
+    self.assertEqual(self.game.players[0].tokens, 0)
+    self.assertEqual(self.game.center, 1)
+
+    # Test moving from 3 to the right
+    self.game.move_tokens_by_direction(3, 'R')
+    # Expected P0: 1, P3: 3
+    self.assertEqual(self.game.players[0].tokens, 1)
+    self.assertEqual(self.game.players[3].tokens, 3)
+
+    # Test moving from 3 to the left
+    self.game.move_tokens_by_direction(3, 'L')
+    # Expected P2: 4, P3: 2
+    self.assertEqual(self.game.players[2].tokens, 4)
+    self.assertEqual(self.game.players[3].tokens, 2)
+
+    
+
 
 class TestPlayerMethods(unittest.TestCase):
   def setUp(self):
