@@ -28,8 +28,30 @@ class TestGameMethods(unittest.TestCase):
     self.assertEqual([], self.game.players, f'Expected reset to result in no players, but there are players')
     self.assertEqual(self.game.num_players, 0)
     self.assertEqual(self.game.center, 0, f'Expecting center pot to be 0 but got {self.game.center}')
+
+  def test_move_tokens(self):
+    self.game.reset_game()
+
+    self.game.add_player('Test 0')
+    self.game.add_player('Test 1')
+
+    self.assertEqual(self.game.players[0].tokens, 3, f'Expected player 0 to have 3 tokens but has {self.game.players[0].tokens}')
+    self.assertEqual(self.game.players[1].tokens, 3, f'Expected player 1 to have 3 tokens but has {self.game.players[1].tokens}')
     
-  
+    self.game.move_tokens(0, 1)
+    self.assertEqual(self.game.players[0].tokens, 2, f'After moving tokens from Player 0 to Player 1, expected Player 0 to have 2 tokens but has {self.game.players[0].tokens}')
+    self.assertEqual(self.game.players[1].tokens, 4, f'After moving tokens from Player 0 to Player 1, expected Player 1 to have 4 tokens but has {self.game.players[1].tokens}')
+    
+    self.game.move_tokens(0, 1)
+    self.game.move_tokens(0, 1)
+    self.assertEqual(self.game.players[0].tokens, 0, f'After moving 3 tokens from Player 0 to Player 1, expected Player 0 to have 0 tokens but has {self.game.players[0].tokens}')
+    self.assertEqual(self.game.players[1].tokens, 6, f'After moving tokens from Player 0 to Player 1, expected Player 1 to have 6 tokens but has {self.game.players[1].tokens}')
+    
+    self.game.move_tokens(0, 1)
+    self.assertEqual(self.game.players[0].tokens, 0, f'After attempting to move tokens when empty from player 0 to player 1, expected Player 0 to have 0 tokens but has {self.game.players[0].tokens}')
+    self.assertEqual(self.game.players[1].tokens, 6, f'After attempting to move tokens when empty from player 0 to player 1, expected Player 1 to have 6 tokens but has {self.game.players[1].tokens}')
+    
+
 class TestPlayerMethods(unittest.TestCase):
   def setUp(self):
     self.player0 = Player(name = 'Test Player 0')
