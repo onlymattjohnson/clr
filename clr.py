@@ -87,6 +87,11 @@ class Game():
     
     self.move_tokens(player_from = player_from, player_to = player_to)
 
+  def reset_game(self):
+    self.num_players = 0
+    self.players = []
+    self.center = 0
+
 if __name__ == '__main__':
     new_game = Game()
     new_game.start_game()

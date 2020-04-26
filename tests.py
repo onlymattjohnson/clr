@@ -10,6 +10,25 @@ class TestGameMethods(unittest.TestCase):
     num_players = len(self.game.players)
     self.assertEqual(num_players, 1, f'Added 1 player but there are {num_players} showing.')
     self.assertEqual(self.game.players[0].name, 'Matt', f'Expected player 0 name to be Matt but got {self.game.players[0].name}')
+
+  def test_reset_game(self):
+    self.game.add_player('Matt')
+    self.game.add_player('Matt2')
+    self.game.add_player('Matt3')
+    self.game.add_player('Matt4')
+    
+    self.game.players[0].tokens = 1
+    self.game.players[1].tokens = 2
+    self.game.players[2].tokens = 3
+    self.game.players[3].tokens = 4
+    
+    self.game.center = 5
+
+    self.game.reset_game()
+    self.assertEqual([], self.game.players, f'Expected reset to result in no players, but there are players')
+    self.assertEqual(self.game.num_players, 0)
+    self.assertEqual(self.game.center, 0, f'Expecting center pot to be 0 but got {self.game.center}')
+    
   
 class TestPlayerMethods(unittest.TestCase):
   def setUp(self):
