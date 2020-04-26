@@ -51,6 +51,10 @@ class TestGameMethods(unittest.TestCase):
     self.assertEqual(self.game.players[0].tokens, 0, f'After attempting to move tokens when empty from player 0 to player 1, expected Player 0 to have 0 tokens but has {self.game.players[0].tokens}')
     self.assertEqual(self.game.players[1].tokens, 6, f'After attempting to move tokens when empty from player 0 to player 1, expected Player 1 to have 6 tokens but has {self.game.players[1].tokens}')
     
+    self.game.move_tokens(1, 'C')
+    self.assertEqual(self.game.players[1].tokens, 5, f'Moving 1 token from Player 1 to center, expecting P1 to have 5 tokens but actually has {self.game.players[1].tokens}')
+    self.assertEqual(self.game.center, 1, f'Moving 1 token from Player 1 to center, expecting Center to have 1 tokens but actually has {self.game.center}')
+       
 
 class TestPlayerMethods(unittest.TestCase):
   def setUp(self):
