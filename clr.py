@@ -90,6 +90,12 @@ class Game():
     
     self.move_tokens(player_from = player_from, player_to = player_to)
 
+  def take_turn(self, player, dice):
+    for roll in dice:
+      if roll in ['L', 'C', 'R']:
+        self.move_tokens_by_direction(player, roll)
+    return None
+
   def reset_game(self):
     self.num_players = 0
     self.players = []

@@ -93,9 +93,50 @@ class TestGameMethods(unittest.TestCase):
     self.assertEqual(self.game.players[2].tokens, 4)
     self.assertEqual(self.game.players[3].tokens, 2)
 
+  def test_take_turn(self):
+    self.game.reset_game()
+
+    self.game.add_player('Test 0')
+    self.game.add_player('Test 1')
+    self.game.add_player('Test 2')
+    self.game.add_player('Test 3')
+
+    test_dice = ['L', 'L', 'L']
+    self.game.take_turn(0, test_dice)
+    # All dice should have moved to the left
+    self.assertEqual(self.game.players[3].tokens, 6)
+    self.assertEqual(self.game.players[0].tokens, 0)
+
+    test_dice = ['L', 'R', 'C']
+    self.game.take_turn(1, test_dice)
     
+    # P0: 1, P1: 0, P2: 4, P3: 6, C: 1
+    self.assertEqual(self.game.players[0].tokens, 1)
+    self.assertEqual(self.game.players[1].tokens, 0)
+    self.assertEqual(self.game.players[2].tokens, 4)
+    self.assertEqual(self.game.players[3].tokens, 6)
+    self.assertEqual(self.game.center, 1)
 
+    test_dice = ['L', '•', '•']
+    self.game.take_turn(2, test_dice)
+    
+    # P0: 1, P1: 1, P2: 3, P3: 6, C: 1
+    self.assertEqual(self.game.players[0].tokens, 1)
+    self.assertEqual(self.game.players[1].tokens, 1)
+    self.assertEqual(self.game.players[2].tokens, 3)
+    self.assertEqual(self.game.players[3].tokens, 6)
+    self.assertEqual(self.game.center, 1)
 
+    test_dice = ['•', None, None]
+    self.game.take_turn(0, test_dice)
+    
+    # P0: 1, P1: 1, P2: 3, P3: 6, C: 1
+    self.assertEqual(self.game.players[0].tokens, 1)
+    self.assertEqual(self.game.players[1].tokens, 1)
+    self.assertEqual(self.game.players[2].tokens, 3)
+    self.assertEqual(self.game.players[3].tokens, 6)
+    self.assertEqual(self.game.center, 1)
+    
 class TestPlayerMethods(unittest.TestCase):
   def setUp(self):
     self.player0 = Player(name = 'Test Player 0')
